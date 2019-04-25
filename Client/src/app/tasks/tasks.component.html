@@ -1,0 +1,26 @@
+<form class="form" (submit)="add(taskTitle.value); taskTitle.value=''">
+  <div class="form-group">
+    <input #taskTitle class="form-control" placeholder="Task Name">
+  </div>
+  <input type="submit" value="Create" class="btn btn-success btn-lg btn-block">
+</form>
+<hr>
+<table>
+  <div>
+    <tr  *ngFor="let task of tasks" class="m-auto">
+      <td class="text-left">
+        <a (click)="edit(task)" title="Click to edit">
+          <span *ngIf="task !== editTask">{{task.title}}</span>
+          <input type="text" *ngIf="task ===editTask" [(ngModel)]="task.title" (blur)="update()"
+            (keyup.enter)="update()">
+        </a>
+      </td>
+
+      <td class="text-right">
+        <button class="btn btn-danger" (click)="delete(task)">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </div>
+</table>
